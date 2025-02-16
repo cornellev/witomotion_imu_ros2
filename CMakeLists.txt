@@ -7,13 +7,9 @@ project(witmotion_ros)
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
 endif()
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
-endif()
 
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
-endif()
+# Remove all warnings
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 # find dependencies
 
@@ -47,9 +43,6 @@ add_library(witmotion_ros
     ${MOC_SOURCES}
     src/witmotion_ros.cpp
     )
-
-message(WARNING "tf2_geometry_msgs include dir: ${tf2_geometry_msgs_INCLUDE_DIRS} ")
-
 
 set(dependencies
   tf2
