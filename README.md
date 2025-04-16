@@ -1,9 +1,3 @@
-# [Witmotion IMU sensor driver for ROS2](https://wiki.ros.org/witmotion_ros)
-`witmotion_ros` module implements a ROS 2 wrapper for [Witmotion IMU](https://github.com/ElettraSciComp/witmotion_IMU_QT) driver library. It reads the data from the family of TTL-compatible inertial pose estimation units (IMUs) manufactured by [WitMotion Shenzhen Co.,Ltd](https://www.wit-motion.com) publishing the information in ROS-native way using [`sensor_msgs`](http://wiki.ros.org/sensor_msgs) and [`std_msgs`](http://wiki.ros.org/std_msgs) message definition packages. The module is focused on read-only access, so calibration and bias regulation functions are implemented in the underlying library. Port access model is implemented in monopolistic way acccording to UNIX specification, so only one instance of the module can be executed for the dedicated virtual device.
-
-## Datasheets and official documentation
-The module is developed according to the specifications released by Witmotion, the presented snapshot has download date is 23.02.2022. The official website https://wiki.wit-motion.com is not always accessible, so the PDF snapshots are placed under [IPFS web directory](https://ipfs.elettra.eu/ipfs/QmWW2WFYyK5jMtNHbXF7jeTXrMtNkdAC42LtDV9DyLr9tP).
-
 ## Installation
 
 ### Prerequisites
@@ -19,17 +13,7 @@ git clone --recursive https://github.com/cornellev/witomotion_imu_ros2.git witmo
 colcon build --packages-select witmotion_ros
 source install/setup.bash
 ```
-If compilation fails, first check the directory `src/witmotion_ros/witmotion-uart-qt`. If it is empty, the recursive clone failed, and you should manually clone the underlying library from the repository https://github.com/ElettraSciComp/witmotion_IMU_QT into this directory. **IMPORTANT!** Please beware of the directory name, the `CMakeLists` file refers exactly to the name `witmotion-uart-qt` specified in the target import section.
-
-
-## Usage
-The example is for Witmotion WT61C sensor, please refer to the other sample launch files for another sensor.
-```sh
-ros2 launch witmotion_ros wt61c.py
-```
-
-## Configuration
-Configuration of the node is done by default via the configuration YAML file [`config.yml`](./config/config.yml). But it also can be done using [`roslaunch` XML syntax](https://wiki.ros.org/roslaunch/XML) under the node's internal namespace. The single value measurements, like pressure and temperature, are enabled for the linear calibration because there can be differences in decoding coefficients between the sensors (proven for WT31N and JY901B sensors).
+If compilation fails, first check the directory `src/witmotion_ros/witmotion-uart-qt`. If it is empty, the recursive clone failed, and you should manually clone the underlying library from the repository [https://github.com/ElettraSciComp/witmotion_IMU_QT](https://github.com/cornellev/witmotion_IMU_QT) into this directory.
 
 ### Parameters
 - `port` - the virtual kernel device name for a port, `ttyUSB0` by default
